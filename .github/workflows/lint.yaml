@@ -1,0 +1,29 @@
+name: Linting Workflow
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+   
+
+    - name: Install dependencies
+      run: |
+        npm install htmlhint stylelint --save-dev
+
+    - name: Run HTMLHint
+      run: npx htmlhint "**/*.html"
+
+    - name: Run Stylelint
+      run: npx stylelint "**/*.css"
